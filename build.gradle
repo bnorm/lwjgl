@@ -1,0 +1,41 @@
+apply plugin: 'java'
+
+sourceCompatibility = '1.7'
+group = 'bnorm'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.lwjgl.lwjgl', name: 'lwjgl', version: 'latest.release'
+    compile group: 'org.lwjgl.lwjgl', name: 'lwjgl_util', version: 'latest.release'
+    compile group: 'java3d', name: 'vecmath', version: 'latest.release'
+
+    testCompile group: 'junit', name: 'junit', version: 'latest.release'
+}
+
+task natives {
+    description = 'Copies native libraries to an appropriate directory.'
+    def os = System.getProperty('os.name').toLowerCase()
+    def platform = 'linux';
+    if (os.contains('windows')) {
+        platform = 'windows'
+    } else if (os.contains('mac os')) {
+        platform = 'osx'
+    } // assume linux
+
+    def outputDir = "$buildDir/libs/natives"
+    inputs.files(configurations.compile)
+    outputs.dir(outputDir)
+
+    copy {
+        def artifacts = configurations.compile.resolvedConfiguration.resolvedArtifacts
+                .findAll { it.classifier == "natives-$platform" }
+        artifacts.each {
+            from zipTree(it.file)
+        }
+        into outputDir
+    }
+}
