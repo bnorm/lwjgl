@@ -27,7 +27,7 @@ task natives {
         platform = 'osx'
     } // assume linux
 
-    def outputDir = "$buildDir/libs/natives"
+    def outputDir = "$buildDir/natives"
     inputs.files(configurations.compile)
     outputs.dir(outputDir)
 
