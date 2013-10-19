@@ -12,6 +12,7 @@ dependencies {
     compile group: 'org.lwjgl.lwjgl', name: 'lwjgl', version: 'latest.release'
     compile group: 'org.lwjgl.lwjgl', name: 'lwjgl_util', version: 'latest.release'
     compile group: 'java3d', name: 'vecmath', version: 'latest.release'
+    compile files('lib/slick-util.jar')
 
     testCompile group: 'junit', name: 'junit', version: 'latest.release'
 }
