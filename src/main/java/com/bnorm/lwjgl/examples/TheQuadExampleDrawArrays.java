@@ -1,3 +1,5 @@
+package com.bnorm.lwjgl.examples;
+
 import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;

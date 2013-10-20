@@ -1,3 +1,5 @@
+package com.bnorm.lwjgl.examples;
+
 public class Vertex {
 
    // Vertex data

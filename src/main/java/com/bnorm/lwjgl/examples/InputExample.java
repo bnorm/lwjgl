@@ -1,3 +1,5 @@
+package com.bnorm.lwjgl.examples;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;

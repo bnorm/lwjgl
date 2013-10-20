@@ -1,3 +1,5 @@
+package com.bnorm.lwjgl.examples;
+
 public class VertexData {
    // Vertex data
    private float[] xyzw = new float[] {0f, 0f, 0f, 1f};
