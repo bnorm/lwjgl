@@ -62,6 +62,7 @@ public class Tutorial06_KeyboardAndMouse {
 
    int fps;
    long lastFPS;
+   long lastFrame;
 
    public long getTime() {
       return (Sys.getTime() * 1000) / Sys.getTimerResolution();
@@ -74,6 +75,14 @@ public class Tutorial06_KeyboardAndMouse {
          lastFPS += 1000;
       }
       fps++;
+   }
+
+   public int getDelta() {
+      long time = getTime();
+      int delta = (int) (time - lastFrame);
+      lastFrame = time;
+
+      return delta;
    }
 
    public static void main(String[] args) {
@@ -166,6 +175,7 @@ public class Tutorial06_KeyboardAndMouse {
       Mouse.setCursorPosition(Display.getWidth() / 2, Display.getHeight() / 2);
       while (!Display.isCloseRequested()) {
          updateFPS();
+         int delta = getDelta();
 
          // Calculate view
 
@@ -176,22 +186,22 @@ public class Tutorial06_KeyboardAndMouse {
          Mouse.setCursorPosition(Display.getWidth() / 2, Display.getHeight() / 2);
 
          if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-            camera.moveForward(0.0005f);
+            camera.moveForward(0.005f * delta);
          }
          if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-            camera.moveForward(-0.0005f);
+            camera.moveForward(-0.005f * delta);
          }
          if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-            camera.moveRight(0.0005f);
+            camera.moveRight(0.005f * delta);
          }
          if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-            camera.moveRight(-0.0005f);
+            camera.moveRight(-0.005f * delta);
          }
          if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-            camera.moveUp(0.0005f);
+            camera.moveUp(0.005f * delta);
          }
          if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-            camera.moveUp(-0.0005f);
+            camera.moveUp(-0.005f * delta);
          }
 
          Matrix4f projection = camera.getPerspective();
