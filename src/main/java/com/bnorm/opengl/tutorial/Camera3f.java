@@ -69,7 +69,7 @@ public class Camera3f {
 
 
    public Vector3f getPosition() {
-      return position.negate(null);
+      return position;
    }
 
    public void setPosition(Vector3f position) {

@@ -41,10 +41,13 @@ artifactory {
 }
 
 apply plugin: 'java'
+apply plugin: 'application'
 
 sourceCompatibility = '1.7'
-group = 'bnorm'
+group = 'com.bnorm'
 version = '1.0'
+
+mainClassName = System.getProperty("main")
 
 repositories {
     mavenCentral()
@@ -87,6 +90,10 @@ task natives {
         }
         into outputDir
     }
+}
+
+run {
+    systemProperty "java.library.path", "$buildDir/natives"
 }
 
 task publish(dependsOn: artifactoryPublish)
