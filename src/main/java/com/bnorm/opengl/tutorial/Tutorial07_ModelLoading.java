@@ -70,6 +70,8 @@ public class Tutorial07_ModelLoading {
    long lastFPS;
    long lastFrame;
 
+   private boolean captureMouse = false;
+
    public long getTime() {
       return (Sys.getTime() * 1000) / Sys.getTimerResolution();
    }
@@ -190,29 +192,40 @@ public class Tutorial07_ModelLoading {
 
          // Calculate view
 
-         int x = Mouse.getX();
-         int y = Mouse.getY();
-         camera.rotateRight(0.005f * (Display.getWidth() / 2 - x));
-         camera.rotateUp(-0.005f * (Display.getHeight() / 2 - y));
-         Mouse.setCursorPosition(Display.getWidth() / 2, Display.getHeight() / 2);
+         if (Display.isActive()) {
+            if (captureMouse) {
+               int x = Mouse.getX();
+               int y = Mouse.getY();
+               camera.rotateRight(0.005f * (Display.getWidth() / 2 - x));
+               camera.rotateUp(-0.005f * (Display.getHeight() / 2 - y));
+               Mouse.setCursorPosition(Display.getWidth() / 2, Display.getHeight() / 2);
 
-         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-            camera.moveForward(0.005f * delta);
-         }
-         if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-            camera.moveForward(-0.005f * delta);
-         }
-         if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-            camera.moveRight(0.005f * delta);
-         }
-         if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-            camera.moveRight(-0.005f * delta);
-         }
-         if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-            camera.moveUp(0.005f * delta);
-         }
-         if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
-            camera.moveUp(-0.005f * delta);
+               if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+                  camera.moveForward(0.005f * delta);
+               }
+               if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+                  camera.moveForward(-0.005f * delta);
+               }
+               if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
+                  camera.moveRight(0.005f * delta);
+               }
+               if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
+                  camera.moveRight(-0.005f * delta);
+               }
+               if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+                  camera.moveUp(0.005f * delta);
+               }
+               if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+                  camera.moveUp(-0.005f * delta);
+               }
+            }
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+               captureMouse = false;
+            } else if (Mouse.isButtonDown(0)) {
+               captureMouse = true;
+               Mouse.setCursorPosition(Display.getWidth() / 2, Display.getHeight() / 2);
+            }
          }
 
          Matrix4f projection = camera.getPerspective();
