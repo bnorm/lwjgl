@@ -185,7 +185,6 @@ public class Tutorial07_ModelLoading {
       glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
       int matrixId = glGetUniformLocation(pId, "MVP");
-      Mouse.setCursorPosition(Display.getWidth() / 2, Display.getHeight() / 2);
       while (!Display.isCloseRequested()) {
          updateFPS();
          int delta = getDelta();
